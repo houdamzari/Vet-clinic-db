@@ -24,11 +24,10 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [your_project_name] <a name="about-project"></a>
+# 📖 [Vet Clinic database] <a name="about-project"></a>
 
 The Vet Clinic database is a relational database implemented using MySQL Workbench and typed in Structured Query Language (SQL). The database is designed to provide all the necessary data for creating a web application for a veterinary clinic.
 
-**[your_project__name]** is a...
 
 ## 🛠 Built With <a name="built-with"></a>
 
