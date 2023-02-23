@@ -31,3 +31,30 @@ ALTER TABLE animals ADD CONSTRAINT fk_species_id FOREIGN KEY (species_id) REFERE
 -- Add column owner_id which is a foreign key referencing the owners table
 ALTER TABLE animals ADD COLUMN owner_id INTEGER;
 ALTER TABLE animals ADD CONSTRAINT fk_owner_id FOREIGN KEY (owner_id) REFERENCES owners(id);
+
+CREATE TABLE vets (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    age INTEGER,
+    date_of_graduation DATE
+);
+
+
+-- specializations table
+CREATE TABLE specializations (
+    vet_id INTEGER,
+    species_id INTEGER,
+    PRIMARY KEY (vet_id, species_id),
+    FOREIGN KEY (vet_id) REFERENCES vets(id),
+    FOREIGN KEY (species_id) REFERENCES species(id)
+);
+
+-- visits table
+CREATE TABLE visits (
+    vet_id INTEGER,
+    animal_id INTEGER,
+    visit_date DATE,
+    PRIMARY KEY (vet_id, animal_id, visit_date),
+    FOREIGN KEY (vet_id) REFERENCES vets(id),
+FOREIGN KEY (animal_id) REFERENCES animals(id)
+);

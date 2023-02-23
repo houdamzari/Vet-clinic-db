@@ -50,3 +50,36 @@ UPDATE animals SET owner_id = (SELECT id FROM owners WHERE full_name = 'Bob') WH
 UPDATE animals SET owner_id = (SELECT id FROM owners WHERE full_name = 'Melody Pond') WHERE name IN ('Charmander', 'Squirtle', 'Blossom');
 UPDATE animals SET owner_id = (SELECT id FROM owners WHERE full_name = 'Dean Winchester') WHERE name IN ('Angemon', 'Boarmon');
 
+
+
+-- Insert data for vets
+INSERT INTO vets (name, age, date_of_graduation) VALUES
+('William Tatcher', 45, '2000-04-23'),
+('Maisy Smith', 26, '2019-01-17'),
+('Stephanie Mendez', 64, '1981-05-04'),
+('Jack Harkness', 38, '2008-06-08');
+
+INSERT INTO specializations(species_id, vets_id)
+VALUES((SELECT id FROM species WHERE name = 'Pokimon'), (SELECT id FROM vets WHERE name = 'William Tatcher')),
+((SELECT id FROM species WHERE name = 'Digimon'), (SELECT id FROM vets WHERE name = 'Stephanie Mendez')),
+((SELECT id FROM species WHERE name = 'Pokimon'), (SELECT id FROM vets WHERE name = 'Stephanie Mendez')),
+((SELECT id FROM species WHERE name = 'Digimon'), (SELECT id FROM vets WHERE name = 'Jack Harkness'));
+
+INSERT INTO visits (animal_id, vet_id, date_of_visit)
+SELECT a.id, v.id, '2020-05-24' FROM animals a
+JOIN vets v ON v.name = 'William Tatcher' AND a.name = 'Agumon'
+UNION
+SELECT a.id, v.id, '2020-07-22' FROM animals a
+JOIN vets v ON v.name = 'Stephanie Mendez' AND a.name = 'Agumon'
+UNION
+SELECT a.id, v.id, '2021-02-02' FROM animals a
+JOIN vets v ON v.name = 'Jack Harkness' AND a.name = 'Gabumon'
+UNION
+SELECT a.id, v.id, '2020-01-05' FROM animals a
+JOIN vets v ON v.name = 'Maisy Smith' AND a.name = 'Pikachu'
+UNION
+SELECT a.id, v.id, '2020-03-08' FROM animals a
+JOIN vets v ON v.name = 'Maisy Smith' AND a.name = 'Pikachu'
+UNION
+SELECT a.id, v.id, '2020-03-14' FROM animals a
+JOIN vets v ON v.name = 'Maisy Smith' AND a.name = 'Pikachu';
